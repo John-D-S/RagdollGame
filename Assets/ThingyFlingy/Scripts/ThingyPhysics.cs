@@ -19,7 +19,9 @@ public class ThingyPhysics : MonoBehaviour
         }
     }
 
-    [SerializeField] private float standingForce = 3f;
+    [SerializeField] private float maxStandingForce = 3f;
+    [SerializeField] private float standingForceDepletionTime = 1f;
+    private float currentStandingForce;
     [SerializeField] private float standingBalanceSpring = 1f;
     [SerializeField] private float standingBalanceDamper = 1f;
 
@@ -62,14 +64,20 @@ public class ThingyPhysics : MonoBehaviour
         UpdateJoint(standingForceDrive, standingBalancer);
         if(IsOnGround)
         {
-            rb.AddForce(Vector3.up * standingForce);
+            currentStandingForce = maxStandingForce;
             configurableJoint.angularXMotion = ConfigurableJointMotion.Limited;
             configurableJoint.angularZMotion = ConfigurableJointMotion.Limited;
         }
         else
         {
+            if(currentStandingForce > 0)
+                currentStandingForce -= maxStandingForce * Time.fixedDeltaTime / standingForceDepletionTime;
+            else
+                currentStandingForce = 0;
             configurableJoint.angularXMotion = ConfigurableJointMotion.Free;
             configurableJoint.angularZMotion = ConfigurableJointMotion.Free;
         }
+        if(currentStandingForce > 0)
+            rb.AddForce(Vector3.up * currentStandingForce);
     }
 }
