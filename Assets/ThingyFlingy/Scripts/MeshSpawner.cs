@@ -19,6 +19,12 @@ public abstract class MeshSpawner : MonoBehaviour
 	{
 		float randomPointA = Random.Range(0f, 1f);
 		float randomPointB = Random.Range(0f, 1f);
+		//if a + b is greater than 1 the point will lie outside of the triangle, so set a to 1 - a and b to 1 - b if that is the case.
+		if(randomPointA + randomPointB >= 1f)
+		{
+			randomPointA = 1 - randomPointA;
+			randomPointB = 1 - randomPointB;
+		}
 		//the below algorithm is sourced from https://math.stackexchange.com/questions/538458/how-to-sample-points-on-a-triangle-surface-in-3d
 		//Vector3 returnValue = _point1 + randomPointA * (_point2 - _point1) + randomPointB * (_point3 - _point1);
 		Vector3 returnValue = _points[0] + randomPointA * (_points[1] - _points[0]) + randomPointB * (_points[2] - _points[0]);
@@ -52,13 +58,13 @@ public abstract class MeshSpawner : MonoBehaviour
 		List<Vector3> randomTriangleVertices = TrianglePoints(randomTriangle);
 		return GetRandomPositionWithinTriangle(randomTriangleVertices);
 	}
-
+	
 	/// <summary>
 	/// Instantiates the given object on a random postition on the mesh.
 	/// </summary>
 	protected void InstantiateObjectAtRandomPointOnMesh(GameObject _gameObject)
 	{
-		Vector3 positionToSpawnObject = GetRandomPosOnMesh(Mesh) + transform.position + spawningOffset;
+		Vector3 positionToSpawnObject = transform.rotation * Vector3.Scale(GetRandomPosOnMesh(Mesh), transform.localScale) + transform.position + spawningOffset;
 		Instantiate(_gameObject, positionToSpawnObject, Quaternion.identity);
 	}
 

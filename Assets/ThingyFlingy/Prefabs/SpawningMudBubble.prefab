@@ -94,8 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7ea399d6da52b4d8ad9c0626875333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riseHeight: 1
-  endScale: 1
+  riseHeight: 0
+  endScale: 0.75
   lerpSpeed: 0.01
   lifeTime: 3
   spawnedGameObjects:

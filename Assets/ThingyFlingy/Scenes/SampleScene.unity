@@ -257,6 +257,10 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1125307
       objectReference: {fileID: 0}
@@ -270,27 +274,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8451589
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.004056525
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.5344937
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.0025654193
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 64.62
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -316,8 +320,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawningMeshFilter: {fileID: 148275274}
+  spawningOffset: {x: 0, y: 0, z: 0}
   emptyBubble: {fileID: 2632057600349501341, guid: d6e3bd1a11fbd3e46bba86710f4a3d06, type: 3}
-  timeBetweenEmptyBubbles: 0.1
+  timeBetweenEmptyBubbles: 0.001
   spawningBubble: {fileID: 1886661887047135785, guid: 037bc256fe770ec4695a7d6b3b8168b3, type: 3}
   timeBetweenSpawningBubbles: 1
   objectTagToCheck: Thingy
