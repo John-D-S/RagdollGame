@@ -1422,7 +1422,7 @@ GameObject:
   - component: {fileID: 1990600502}
   m_Layer: 6
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1450,8 +1450,8 @@ Rigidbody:
   m_GameObject: {fileID: 1990600495}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 4
+  m_Drag: 2
+  m_AngularDrag: 20
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1546,9 +1546,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2c9d5dbf4721d4a8ad584107fee5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationTorque: 10
-  rotationTorqueDrag: 0
-  movementForce: 5
+  rotationTorque: 40
+  movementForce: 50
+  cameraGameObject: {fileID: 963194225}
+  cameraOffset: {x: 0, y: 0, z: -10}
+  cameraLookPosition: {x: 0, y: 1, z: 0}
 --- !u!1001 &2072421776
 PrefabInstance:
   m_ObjectHideFlags: 0
