@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-[RequireComponent(typeof(Rigidbody), typeof(ConfigurableJoint))]
+[RequireComponent(typeof(Rigidbody))]
 public class ThingyPhysics : MonoBehaviour
 {
     [SerializeField] private List<CollisionDetector> collisionDetectors = new List<CollisionDetector>();
@@ -19,64 +19,49 @@ public class ThingyPhysics : MonoBehaviour
         }
     }
 
+    
     [SerializeField] private float maxStandingForce = 3f;
     [SerializeField] private float standingForceDepletionTime = 1f;
     private float currentStandingForce;
-    [SerializeField] private float standingBalanceSpring = 1f;
-    [SerializeField] private float standingBalanceDamper = 1f;
+    [SerializeField, Tooltip("I assume this means torque")] private float UprightTorque = 1f;
+    private float currentUprightTorque;
 
+    private ConfigurableJoint configurableJoint; 
     private Rigidbody rb;
-    private ConfigurableJoint configurableJoint;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         configurableJoint = GetComponent<ConfigurableJoint>();
-    }
-
-    private void UpdateJoint( JointDrive _jointDrive, SoftJointLimitSpring _softJointLimitSpring)
-    {
-        configurableJoint.angularXLimitSpring = _softJointLimitSpring;
-        //configurableJoint.xDrive = _jointDrive;
-        //configurableJoint.yDrive = _jointDrive;
-        //configurableJoint.zDrive = _jointDrive;
-    }
-
-    private void UpdateJointSettings(ref JointDrive _jointDrive, ref SoftJointLimitSpring _softJointLimitSpring)
-    {
-        //linear drive stuff
-        //configurableJoint.targetPosition = transform.position + Vector3.up * 100;
-        //configurableJoint.targetVelocity = Vector3.one * standingSpeed;
-        //_jointDrive.positionSpring = standingSpring;
-        //Debug.Log(_jointDrive.positionSpring);
-        //_jointDrive.positionDamper = 1;
-        //_jointDrive.maximumForce = standingForce;
-        //angular balancing stuff
-        _softJointLimitSpring.damper = standingBalanceDamper;
-        _softJointLimitSpring.spring = standingBalanceSpring;
+        //initialising hingeJointMotors
     }
 
     private void FixedUpdate()
     {
-        SoftJointLimitSpring standingBalancer = new SoftJointLimitSpring();
-        JointDrive standingForceDrive = new JointDrive();
-        UpdateJointSettings(ref standingForceDrive, ref standingBalancer);
-        UpdateJoint(standingForceDrive, standingBalancer);
+        
         if(IsOnGround)
         {
             currentStandingForce = maxStandingForce;
-            configurableJoint.angularXMotion = ConfigurableJointMotion.Limited;
-            configurableJoint.angularZMotion = ConfigurableJointMotion.Limited;
+            if(currentUprightTorque < UprightTorque)
+                currentUprightTorque += UprightTorque * Time.fixedDeltaTime / standingForceDepletionTime;
+            else
+                currentUprightTorque = UprightTorque;
         }
         else
         {
+            if(currentUprightTorque > 0)
+                currentUprightTorque -= UprightTorque * Time.fixedDeltaTime / standingForceDepletionTime;
+            else
+                currentUprightTorque = 0;
+            
             if(currentStandingForce > 0)
                 currentStandingForce -= maxStandingForce * Time.fixedDeltaTime / standingForceDepletionTime;
             else
-                currentStandingForce = 0;
-            configurableJoint.angularXMotion = ConfigurableJointMotion.Free;
-            configurableJoint.angularZMotion = ConfigurableJointMotion.Free;
+                currentStandingForce = 0;    
         }
+        
+        var rot = Quaternion.FromToRotation(transform.up, Vector3.up);
+        rb.AddRelativeTorque(new Vector3(rot.x, rot.y, rot.z) * currentUprightTorque);
         if(currentStandingForce > 0)
             rb.AddForce(Vector3.up * currentStandingForce);
     }
