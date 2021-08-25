@@ -60,7 +60,7 @@ public class ThingyPhysics : MonoBehaviour
                 currentStandingForce = 0;    
         }
         
-        var rot = Quaternion.FromToRotation(transform.up, Vector3.up);
+        Quaternion rot = Quaternion.FromToRotation(transform.up, Vector3.up);
         rb.AddRelativeTorque(new Vector3(rot.x, rot.y, rot.z) * currentUprightTorque);
         if(currentStandingForce > 0)
             rb.AddForce(Vector3.up * currentStandingForce);
