@@ -7,6 +7,7 @@ using UnityEngine;
 public class Hover : MonoBehaviour
 {
     [SerializeField] private float targetHeight = 3;
+    public float TargetHeight => targetHeight;
     [SerializeField] private float verticalDragModifier = 1;
     private Rigidbody rb;
     

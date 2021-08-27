@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
+using UnityEngine.XR;
 
 public class ThingyForceField : MonoBehaviour
 {
@@ -46,5 +49,19 @@ public class ThingyForceField : MonoBehaviour
         forceToAdd += AntiGravityForce();
         forceToAdd *= _rigidbody.mass;
         _rigidbody.AddForce(forceToAdd);
+    }
+
+    private List<ThingyPhysics> GetThingiesInForceField()
+    {
+        List<ThingyPhysics> returnValue = new List<ThingyPhysics>();
+        List<Collider> collidersWithinForceField = Physics.OverlapSphere(transform.position, outerFieldRadius).ToList();
+        foreach(Collider collider in collidersWithinForceField)
+        {
+            if(ThingyPhysics.gameObjectToThingyMap.ContainsKey(collider.gameObject) && !returnValue.Contains(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]))
+            {
+                returnValue.Add(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]);
+            }
+        }
+        return returnValue;
     }
 }

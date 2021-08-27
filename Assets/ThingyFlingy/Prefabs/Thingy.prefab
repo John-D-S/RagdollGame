@@ -478,14 +478,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionDetectors:
+  - {fileID: 8988109382968443408}
   - {fileID: 5409109446861514323}
   - {fileID: 459501367942824156}
+  - {fileID: 2520701298039413678}
   - {fileID: 2076533788176834481}
   - {fileID: 4866504693627858876}
-  - {fileID: 8988109382968443408}
   maxStandingForce: 4.5
   standingForceDepletionTime: 0.25
-  UprightTorque: 5
+  UprightTorque: 5.5
 --- !u!114 &8988109382968443408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +817,7 @@ GameObject:
   - component: {fileID: 8210430648480532154}
   - component: {fileID: 8210430648480532153}
   - component: {fileID: 8210430648480532155}
+  - component: {fileID: 2520701298039413678}
   m_Layer: 0
   m_Name: Head
   m_TagString: Thingy
@@ -913,6 +915,18 @@ CharacterJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2520701298039413678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635495206896906860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dece772a8a3917499c782a665948a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8103901251260495222
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8537688349826040327}
+  - component: {fileID: 161735735647818371}
   m_Layer: 0
   m_Name: Thingy
   m_TagString: Thingy
@@ -975,6 +990,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &161735735647818371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9020752923116640445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651b19b537e69e745bf56c6f2dbafe1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkedGameObject: {fileID: 2032287245942291188}
 --- !u!1 &9145407258160220627
 GameObject:
   m_ObjectHideFlags: 0

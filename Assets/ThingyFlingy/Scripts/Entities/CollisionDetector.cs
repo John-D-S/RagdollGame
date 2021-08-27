@@ -8,6 +8,15 @@ public class CollisionDetector : MonoBehaviour
 {
 	private bool isColliding = false;
 	public bool IsColliding => isColliding;
+	public ThingyPhysics connectedThingyPhysics;
+	
+	private void OnCollisionEnter(Collision other)
+	{
+		if(connectedThingyPhysics)
+		{
+			
+		}
+	}
 
 	private void OnCollisionStay(Collision other)
 	{
