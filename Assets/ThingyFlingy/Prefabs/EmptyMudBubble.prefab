@@ -97,5 +97,5 @@ MonoBehaviour:
   riseHeight: 0
   endScale: 0.075
   lerpSpeed: 0.01
-  lifeTime: 30
+  lifeTime: 3
   spawnedGameObjects: []

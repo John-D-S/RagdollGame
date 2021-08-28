@@ -262,15 +262,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.1125307
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 3.69
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.637439
+      value: -14.65
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1483,7 +1483,7 @@ GameObject:
   - component: {fileID: 1990600497}
   - component: {fileID: 1990600496}
   - component: {fileID: 1990600502}
-  - component: {fileID: 1990600498}
+  - component: {fileID: 1990600503}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1521,19 +1521,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &1990600498
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990600495}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1990600499
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1611,12 +1598,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2c9d5dbf4721d4a8ad584107fee5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationTorque: 40
-  movementForce: 50
+  rotationTorque: 60
+  movementForce: 40
   maxVerticalCameraAngle: 85
   cameraGameObject: {fileID: 963194225}
   cameraOffset: {x: 0, y: 0, z: -10}
   cameraLookPosition: {x: 0, y: 1, z: 0}
+--- !u!114 &1990600503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990600495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6383466a28fa5174dbf3b8fd6ad5b5e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outerFieldRadius: 5
+  outerFieldAttractionStrength: 15
+  innerFieldRadius: 0.45
+  innerFieldRepulsionStrength: 1
+  noForceRadius: 0.25
+  antiEscapeForceMultiplier: 1
 --- !u!1001 &2072421776
 PrefabInstance:
   m_ObjectHideFlags: 0

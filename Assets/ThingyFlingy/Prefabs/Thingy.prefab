@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8633449787159524554}
   - component: {fileID: 2406475002886489675}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Thingy
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8210430649234705032}
   - component: {fileID: 8210430649234705034}
   - component: {fileID: 5409109446861514323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg.L
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dece772a8a3917499c782a665948a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedThingyPhysics: {fileID: 0}
 --- !u!1 &290545034762982563
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1184433425902005054}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 777753857398968985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -286,7 +287,7 @@ GameObject:
   - component: {fileID: 8210430648341821995}
   - component: {fileID: 8210430648341822037}
   - component: {fileID: 2076533788176834481}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm.L
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -396,6 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dece772a8a3917499c782a665948a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedThingyPhysics: {fileID: 0}
 --- !u!1 &2032287245942291188
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +411,7 @@ GameObject:
   - component: {fileID: 8210430648644924044}
   - component: {fileID: 2199012539515986694}
   - component: {fileID: 8988109382968443408}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -499,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dece772a8a3917499c782a665948a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedThingyPhysics: {fileID: 0}
 --- !u!1 &2457666031685465086
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6733677985144031733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +545,7 @@ GameObject:
   - component: {fileID: 8210430650355522061}
   - component: {fileID: 8210430650355522060}
   - component: {fileID: 4866504693627858876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm.R
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -652,6 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dece772a8a3917499c782a665948a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedThingyPhysics: {fileID: 0}
 --- !u!1 &4266419014265153972
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +669,7 @@ GameObject:
   - component: {fileID: 8210430649434088849}
   - component: {fileID: 8210430649434088850}
   - component: {fileID: 459501367942824156}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg.R
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -775,6 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dece772a8a3917499c782a665948a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedThingyPhysics: {fileID: 0}
 --- !u!1 &6498837652189848473
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5688485000977463530}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +823,7 @@ GameObject:
   - component: {fileID: 8210430648480532153}
   - component: {fileID: 8210430648480532155}
   - component: {fileID: 2520701298039413678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -927,6 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dece772a8a3917499c782a665948a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedThingyPhysics: {fileID: 0}
 --- !u!1 &8103901251260495222
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +942,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1276240140416313201}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -967,7 +973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8537688349826040327}
   - component: {fileID: 161735735647818371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Thingy
   m_TagString: Thingy
   m_Icon: {fileID: 0}
@@ -1012,7 +1018,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6505832421740316684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arm.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
