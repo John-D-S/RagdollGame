@@ -1610,8 +1610,8 @@ MonoBehaviour:
   movementForce: 40
   maxVerticalCameraAngle: 85
   cameraGameObject: {fileID: 963194225}
-  cameraOffset: {x: 0, y: 0, z: -10}
-  cameraLookPosition: {x: 0, y: 1, z: 0}
+  cameraOffset: {x: 0, y: 2, z: -10}
+  cameraLookPosition: {x: 0, y: 2, z: 0}
   thingyForceField: {fileID: 0}
 --- !u!114 &1990600503
 MonoBehaviour:
@@ -1630,8 +1630,10 @@ MonoBehaviour:
   innerFieldRadius: 0.45
   innerFieldRepulsionStrength: 1
   noForceRadius: 0.45
+  shootVelocity: 10
   maxThingies: 25
   antiEscapeForceMultiplier: 1
+  camera: {fileID: 963194225}
 --- !u!1001 &2072421776
 PrefabInstance:
   m_ObjectHideFlags: 0

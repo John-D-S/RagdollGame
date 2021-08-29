@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 using UnityEngine;
@@ -14,9 +15,13 @@ public class ThingyForceField : MonoBehaviour
     [SerializeField] private float innerFieldRadius = 2;
     [SerializeField] private float innerFieldRepulsionStrength = 1;
     [SerializeField] private float noForceRadius = 0.25f;
+    [SerializeField] private float shootVelocity = 10f;
     [SerializeField] private int maxThingies = 30;
     [SerializeField] private float antiEscapeForceMultiplier;
+    [SerializeField] private GameObject camera;
 
+    private List<ThingyPhysics> ignoredThingies = new List<ThingyPhysics>();
+    
     private Vector3 thisFamePosition;
     private Vector3 lastFramePosition;
     private Vector3 thisFrameVelocity;
@@ -95,7 +100,10 @@ public class ThingyForceField : MonoBehaviour
         {
             if(returnValue.Count < maxThingies && ThingyPhysics.gameObjectToThingyMap.ContainsKey(collider.gameObject) && !returnValue.Contains(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]))
             {
-                returnValue.Add(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]);
+                if(!ignoredThingies.Contains(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]))
+                {
+                    returnValue.Add(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]);
+                }
             }
         }
         return returnValue;
@@ -106,20 +114,48 @@ public class ThingyForceField : MonoBehaviour
         thisFamePosition = lastFramePosition = transform.position;
     }
 
+    private IEnumerator IgnoreThingyForSeconds(ThingyPhysics _thingyToIgnore, float _secondsToIgnore)
+    {
+        ignoredThingies.Add(_thingyToIgnore);
+        yield return new WaitForSeconds(_secondsToIgnore);
+        ignoredThingies.Remove(_thingyToIgnore);
+    }
+    
     public void ShootThingy()
     {
+        
         List<ThingyPhysics> thingysInForceField = GetThingiesInForceField();
-        ThingyPhysics thingyPhysicsToShoot;
-        foreach(ThingyPhysics thingyPhysics in thingysInForceField)
+        if(thingysInForceField.Count > 0)
         {
-            foreach(Rigidbody iteratedRigidbody in thingyPhysics.ConnectedRigidbodies)
+            Vector3 shootTarget = Vector3.one;
+            RaycastHit hit = new RaycastHit();
+            if(camera && Physics.Raycast(camera.transform.position, camera.transform.forward, 1000, LayerMask.GetMask("IgnoredByHover")))
             {
-                Rigidbody thingyRigidbody = iteratedRigidbody;
-                ApplyForceField(ref thingyRigidbody);
+                shootTarget = hit.point;
+            }
+            else if(camera)
+            {
+                shootTarget = transform.position + camera.transform.forward * (outerFieldRadius * 5f);
+            }
+            List<ThingyPhysics> orderedThingiesInField = thingysInForceField.OrderBy(c => (shootTarget - c.transform.position).sqrMagnitude).ToList(); 
+            ThingyPhysics thingyPhysicsToShoot = orderedThingiesInField[0];
+            StartCoroutine(IgnoreThingyForSeconds(thingyPhysicsToShoot, 1f));
+            Vector3 shootDirection = (shootTarget - thingyPhysicsToShoot.transform.position).normalized;
+            foreach(Rigidbody connectedRigidbody in thingyPhysicsToShoot.ConnectedRigidbodies)
+            {
+                connectedRigidbody.velocity += shootDirection * shootVelocity;
             }
         }
     }
-    
+
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            ShootThingy();
+        }
+    }
+
     private void FixedUpdate()
     {
         UpdateAccelleration();
