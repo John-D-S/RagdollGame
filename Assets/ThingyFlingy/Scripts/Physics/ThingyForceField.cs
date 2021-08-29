@@ -56,10 +56,11 @@ public class ThingyForceField : MonoBehaviour
 
     private Vector3 AntiEscapeForce(Rigidbody _rigidbody)
     {
-        float dotFromPosToRBPos = Vector3.Dot(_rigidbody.velocity, _rigidbody.position - transform.position); 
+        float dotFromPosToRBPos = Vector3.Dot(_rigidbody.velocity, _rigidbody.position - transform.position);
+        Vector3 relativeRigidbodyVelocity = _rigidbody.velocity - thisFrameVelocity;
         if(dotFromPosToRBPos > 0)
         {
-            return -_rigidbody.velocity * antiEscapeForceMultiplier * dotFromPosToRBPos;
+            return -relativeRigidbodyVelocity * (antiEscapeForceMultiplier * dotFromPosToRBPos);
         }
         return Vector3.zero;
     }
@@ -79,8 +80,8 @@ public class ThingyForceField : MonoBehaviour
             forceToAdd += AttractionForce(rbPosition);
         }
         forceToAdd += AntiGravityForce();
-        forceToAdd *= _rigidbody.mass;
         forceToAdd += AntiEscapeForce(_rigidbody);
+        forceToAdd *= _rigidbody.mass;
         _rigidbody.AddForce(forceToAdd);
         _rigidbody.velocity += accelleration;
     }
