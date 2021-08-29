@@ -68,10 +68,9 @@ public class ThingyPhysics : MonoBehaviour
     {
         foreach(CollisionDetector collisionDetector in collisionDetectors)
         {
-            RemoveGameObjectFromDict(collisionDetector.gameObject);
+            gameObjectToThingyMap.Remove(collisionDetector.gameObject);
         }
     }
-    private void RemoveGameObjectFromDict(GameObject _gameObject) => gameObjectToThingyMap.Remove(_gameObject);
 
     private void HitEnemy(float _velocity, ref Enemy _enemy)
     {
@@ -90,7 +89,6 @@ public class ThingyPhysics : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         if(IsOnGround)
         {
             currentStandingForce = maxStandingForce;

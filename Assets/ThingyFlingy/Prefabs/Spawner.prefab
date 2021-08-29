@@ -134,7 +134,7 @@ MonoBehaviour:
   timeBetweenSpawningBubbles: 0.5
   objectTagToCheck: Thingy
   distanceTorCheckForNearbyObjects: 100
-  maxNearbyObjectsWithTag: 1500
+  maxNearbyObjectsWithTag: 1200
 --- !u!64 &1079792603686113235
 MeshCollider:
   m_ObjectHideFlags: 0
