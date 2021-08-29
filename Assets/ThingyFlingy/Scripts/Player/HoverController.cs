@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+
 using UnityEngine;
 using UnityEngine.XR;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(ThingyForceField))]
 public class HoverController : MonoBehaviour
 {
     private Rigidbody rb;
@@ -15,6 +17,7 @@ public class HoverController : MonoBehaviour
     [SerializeField] private GameObject cameraGameObject;
     [SerializeField] private Vector3 cameraOffset = Vector3.back * 10;
     [SerializeField] private Vector3 cameraLookPosition = Vector3.up;
+    [SerializeField] private ThingyForceField thingyForceField;
     
     private void Start()
     {
@@ -32,29 +35,33 @@ public class HoverController : MonoBehaviour
         }
     }
 
-    private Vector3 AimingTorque => new Vector3(0, mouseDelta.x * rotationTorque, 0);
+    private Vector3 forceDirection;
+    private Vector3 TargetForce => forceDirection.normalized * movementForce;
+    private float currentCameraXRotation = 0;
+    private float currentCameraYRotation = 0;
+
+    private void UpdateForceDirection()
+    {
+        Quaternion forceRot = Quaternion.Euler(0, cameraGameObject.transform.rotation.eulerAngles.y,0);
+        forceDirection = forceRot * (new Vector3(Input.GetAxisRaw("Horizontal"), 0 , Input.GetAxisRaw("Vertical")).normalized * movementForce);
+    }
     
-    private Vector2 mouseDelta;
-    private Vector3 unnormalizedDirection;
-    private Vector3 TargetForce => unnormalizedDirection.normalized * movementForce;
-    private float currentCameraXrotation = 0;
     private void Update()
     {
-        mouseDelta.x = Input.GetAxisRaw("Mouse X");
-        mouseDelta.y = Input.GetAxisRaw("Mouse Y");
-        unnormalizedDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        UpdateForceDirection();
         if(cameraGameObject)
         {
-            currentCameraXrotation += Input.GetAxisRaw("Mouse Y");
-            if(currentCameraXrotation > maxVerticalCameraAngle)
+            currentCameraXRotation += Input.GetAxisRaw("Mouse Y");
+            currentCameraYRotation += Input.GetAxisRaw("Mouse X");
+            if(currentCameraXRotation > maxVerticalCameraAngle)
             {
-                currentCameraXrotation = maxVerticalCameraAngle;
+                currentCameraXRotation = maxVerticalCameraAngle;
             }
-            else if(currentCameraXrotation < -maxVerticalCameraAngle)
+            else if(currentCameraXRotation < -maxVerticalCameraAngle)
             {
-                currentCameraXrotation = -maxVerticalCameraAngle;
+                currentCameraXRotation = -maxVerticalCameraAngle;
             }
-            cameraGameObject.transform.position = gameObject.transform.position + gameObject.transform.rotation * Quaternion.Euler(-currentCameraXrotation,0, 0) * cameraOffset;
+            cameraGameObject.transform.position = gameObject.transform.position + gameObject.transform.rotation * Quaternion.Euler(-currentCameraXRotation, currentCameraYRotation, 0) * cameraOffset;
             cameraGameObject.transform.LookAt(transform.position + cameraLookPosition);
         }
     }
@@ -62,7 +69,6 @@ public class HoverController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.AddTorque(StabilizingTorque);
-        rb.AddRelativeTorque(AimingTorque);
         rb.AddRelativeForce(TargetForce);
     }
 }

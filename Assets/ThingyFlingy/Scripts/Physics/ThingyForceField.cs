@@ -104,6 +104,20 @@ public class ThingyForceField : MonoBehaviour
         thisFamePosition = lastFramePosition = transform.position;
     }
 
+    public void ShootThingy()
+    {
+        List<ThingyPhysics> thingysInForceField = GetThingiesInForceField();
+        ThingyPhysics thingyPhysicsToShoot;
+        foreach(ThingyPhysics thingyPhysics in thingysInForceField)
+        {
+            foreach(Rigidbody iteratedRigidbody in thingyPhysics.ConnectedRigidbodies)
+            {
+                Rigidbody thingyRigidbody = iteratedRigidbody;
+                ApplyForceField(ref thingyRigidbody);
+            }
+        }
+    }
+    
     private void FixedUpdate()
     {
         UpdateAccelleration();

@@ -327,7 +327,7 @@ MonoBehaviour:
   timeBetweenSpawningBubbles: 1
   objectTagToCheck: Thingy
   distanceTorCheckForNearbyObjects: 100
-  maxNearbyObjectsWithTag: 10
+  maxNearbyObjectsWithTag: 1000
 --- !u!33 &148275274 stripped
 MeshFilter:
   m_CorrespondingSourceObject: {fileID: 7529686852050778107, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
@@ -1514,12 +1514,12 @@ Rigidbody:
   m_GameObject: {fileID: 1990600495}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
+  m_Drag: 3
   m_AngularDrag: 20
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!23 &1990600499
 MeshRenderer:
@@ -1604,6 +1604,7 @@ MonoBehaviour:
   cameraGameObject: {fileID: 963194225}
   cameraOffset: {x: 0, y: 0, z: -10}
   cameraLookPosition: {x: 0, y: 1, z: 0}
+  thingyForceField: {fileID: 0}
 --- !u!114 &1990600503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1620,7 +1621,7 @@ MonoBehaviour:
   outerFieldAttractionStrength: 15
   innerFieldRadius: 0.45
   innerFieldRepulsionStrength: 1
-  noForceRadius: 0.25
+  noForceRadius: 0.45
   antiEscapeForceMultiplier: 1
 --- !u!1001 &2072421776
 PrefabInstance:
