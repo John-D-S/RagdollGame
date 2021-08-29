@@ -14,7 +14,7 @@ public class ThingyForceField : MonoBehaviour
     [SerializeField] private float innerFieldRadius = 2;
     [SerializeField] private float innerFieldRepulsionStrength = 1;
     [SerializeField] private float noForceRadius = 0.25f;
-
+    [SerializeField] private int maxThingies = 30;
     [SerializeField] private float antiEscapeForceMultiplier;
 
     private Vector3 thisFamePosition;
@@ -90,9 +90,10 @@ public class ThingyForceField : MonoBehaviour
     {
         List<ThingyPhysics> returnValue = new List<ThingyPhysics>();
         List<Collider> collidersWithinForceField = Physics.OverlapSphere(transform.position, outerFieldRadius).ToList();
-        foreach(Collider collider in collidersWithinForceField)
+        List<Collider> orderedColliders = collidersWithinForceField.OrderBy(c => (transform.position - c.transform.position).sqrMagnitude).ToList();
+        foreach(Collider collider in orderedColliders)
         {
-            if(ThingyPhysics.gameObjectToThingyMap.ContainsKey(collider.gameObject) && !returnValue.Contains(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]))
+            if(returnValue.Count < maxThingies && ThingyPhysics.gameObjectToThingyMap.ContainsKey(collider.gameObject) && !returnValue.Contains(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]))
             {
                 returnValue.Add(ThingyPhysics.gameObjectToThingyMap[collider.gameObject]);
             }

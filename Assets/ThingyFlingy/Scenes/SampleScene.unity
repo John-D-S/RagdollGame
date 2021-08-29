@@ -258,19 +258,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.08
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.69
+      value: 10.79
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.65
+      value: -14.68
       objectReference: {fileID: 0}
     - target: {fileID: 8866972138388087713, guid: 174e08612ab27e440a25a8677042da5a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -322,9 +330,9 @@ MonoBehaviour:
   spawningMeshFilter: {fileID: 148275274}
   spawningOffset: {x: 0, y: 0, z: 0}
   emptyBubble: {fileID: 2632057600349501341, guid: d6e3bd1a11fbd3e46bba86710f4a3d06, type: 3}
-  timeBetweenEmptyBubbles: 0.001
+  timeBetweenEmptyBubbles: 0.25
   spawningBubble: {fileID: 1886661887047135785, guid: 037bc256fe770ec4695a7d6b3b8168b3, type: 3}
-  timeBetweenSpawningBubbles: 1
+  timeBetweenSpawningBubbles: 0.1
   objectTagToCheck: Thingy
   distanceTorCheckForNearbyObjects: 100
   maxNearbyObjectsWithTag: 1000
@@ -1622,6 +1630,7 @@ MonoBehaviour:
   innerFieldRadius: 0.45
   innerFieldRepulsionStrength: 1
   noForceRadius: 0.45
+  maxThingies: 25
   antiEscapeForceMultiplier: 1
 --- !u!1001 &2072421776
 PrefabInstance:

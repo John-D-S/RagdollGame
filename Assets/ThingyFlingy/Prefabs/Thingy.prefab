@@ -488,7 +488,7 @@ MonoBehaviour:
   - {fileID: 4866504693627858876}
   maxStandingForce: 4.5
   standingForceDepletionTime: 0.25
-  UprightTorque: 5.5
+  UprightTorque: 5.75
 --- !u!114 &8988109382968443408
 MonoBehaviour:
   m_ObjectHideFlags: 0
