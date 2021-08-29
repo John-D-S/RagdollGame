@@ -17,7 +17,6 @@ public class HoverController : MonoBehaviour
     [SerializeField] private GameObject cameraGameObject;
     [SerializeField] private Vector3 cameraOffset = Vector3.back * 10;
     [SerializeField] private Vector3 cameraLookPosition = Vector3.up;
-    [SerializeField] private ThingyForceField thingyForceField;
     
     private void Start()
     {

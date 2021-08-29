@@ -16,6 +16,7 @@ public class ThingyForceField : MonoBehaviour
     [SerializeField] private float innerFieldRepulsionStrength = 1;
     [SerializeField] private float noForceRadius = 0.25f;
     [SerializeField] private float shootVelocity = 10f;
+    [SerializeField] private float coolDownTime = 0.1f;
     [SerializeField] private int maxThingies = 30;
     [SerializeField] private float antiEscapeForceMultiplier;
     [SerializeField] private GameObject camera;
@@ -91,10 +92,10 @@ public class ThingyForceField : MonoBehaviour
         _rigidbody.velocity += accelleration;
     }
 
-    private List<ThingyPhysics> GetThingiesInForceField()
+    private List<ThingyPhysics> GetThingiesInForceField(float _radius)
     {
         List<ThingyPhysics> returnValue = new List<ThingyPhysics>();
-        List<Collider> collidersWithinForceField = Physics.OverlapSphere(transform.position, outerFieldRadius).ToList();
+        List<Collider> collidersWithinForceField = Physics.OverlapSphere(transform.position, _radius).ToList();
         List<Collider> orderedColliders = collidersWithinForceField.OrderBy(c => (transform.position - c.transform.position).sqrMagnitude).ToList();
         foreach(Collider collider in orderedColliders)
         {
@@ -124,12 +125,12 @@ public class ThingyForceField : MonoBehaviour
     public void ShootThingy()
     {
         
-        List<ThingyPhysics> thingysInForceField = GetThingiesInForceField();
+        List<ThingyPhysics> thingysInForceField = GetThingiesInForceField(innerFieldRadius);
         if(thingysInForceField.Count > 0)
         {
             Vector3 shootTarget = Vector3.one;
             RaycastHit hit = new RaycastHit();
-            if(camera && Physics.Raycast(camera.transform.position, camera.transform.forward, 1000, LayerMask.GetMask("IgnoredByHover")))
+            if(camera && Physics.Raycast(camera.transform.position, camera.transform.forward, 1000, LayerMask.GetMask("IgnoredByHover", "Hover")))
             {
                 shootTarget = hit.point;
             }
@@ -147,19 +148,25 @@ public class ThingyForceField : MonoBehaviour
             }
         }
     }
-
+    
+    private float coolDown;
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(coolDown <= coolDownTime)
+        {
+            coolDown += Time.deltaTime;
+        }
+        if(Input.GetMouseButton(0) && coolDown >= coolDownTime)
         {
             ShootThingy();
+            coolDown = 0;
         }
     }
 
     private void FixedUpdate()
     {
         UpdateAccelleration();
-        List<ThingyPhysics> thingysInForceField = GetThingiesInForceField();
+        List<ThingyPhysics> thingysInForceField = GetThingiesInForceField(outerFieldRadius);
         foreach(ThingyPhysics thingyPhysics in thingysInForceField)
         {
             foreach(Rigidbody iteratedRigidbody in thingyPhysics.ConnectedRigidbodies)
