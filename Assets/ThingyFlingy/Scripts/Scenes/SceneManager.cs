@@ -13,7 +13,7 @@ public class SceneManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(currentScene);
     }
     
-    public void RestartGameAfterSeconds(float _seconds)
+    public void ReloadSceneAfterSeconds(float _seconds)
     {
         if(!dothingAfterSecondsRunning)
         {
