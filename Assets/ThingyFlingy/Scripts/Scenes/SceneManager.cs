@@ -5,16 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
-    void Update()
+    public delegate void DoThing();
+    
+    public void ReloadScene()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        int currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(currentScene);
+    }
+    
+    public void RestartGameAfterSeconds(float _seconds)
+    {
+        if(!dothingAfterSecondsRunning)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            StartCoroutine(DoThingAfterSeconds(_seconds, ReloadScene));
         }
+    }
 
-        if(Input.GetAxis("Cancel") > 0)
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    
+    public void QuitGameAfterSeconds(float _seconds)
+    {
+        if(!dothingAfterSecondsRunning)
         {
-            Application.Quit();
+            StartCoroutine(DoThingAfterSeconds(_seconds, QuitGame));
         }
+    }
+
+    private bool dothingAfterSecondsRunning = false;
+    private IEnumerator DoThingAfterSeconds(float _seconds, DoThing _thingToDo)
+    {
+        dothingAfterSecondsRunning = true;
+        yield return new WaitForSeconds(_seconds);
+        dothingAfterSecondsRunning = false;
+        _thingToDo.Invoke();
     }
 }
