@@ -19,7 +19,7 @@ public class ThingyForceField : MonoBehaviour
     [SerializeField] private float coolDownTime = 0.1f;
     [SerializeField] private int maxThingies = 30;
     [SerializeField] private float antiEscapeForceMultiplier;
-    [SerializeField] private GameObject camera;
+    [SerializeField] private GameObject usedCamera;
 
     private List<ThingyPhysics> ignoredThingies = new List<ThingyPhysics>();
     
@@ -130,13 +130,13 @@ public class ThingyForceField : MonoBehaviour
         {
             Vector3 shootTarget = Vector3.one;
             RaycastHit hit = new RaycastHit();
-            if(camera && Physics.Raycast(camera.transform.position, camera.transform.forward, 1000, LayerMask.GetMask("IgnoredByHover", "Hover")))
+            if(usedCamera && Physics.Raycast(usedCamera.transform.position, usedCamera.transform.forward, 1000, LayerMask.GetMask("IgnoredByHover", "Hover")))
             {
                 shootTarget = hit.point;
             }
-            else if(camera)
+            else if(usedCamera)
             {
-                shootTarget = transform.position + camera.transform.forward * (outerFieldRadius * 5f);
+                shootTarget = transform.position + usedCamera.transform.forward * (outerFieldRadius * 5f);
             }
             List<ThingyPhysics> orderedThingiesInField = thingysInForceField.OrderBy(c => (shootTarget - c.transform.position).sqrMagnitude).ToList(); 
             ThingyPhysics thingyPhysicsToShoot = orderedThingiesInField[0];
