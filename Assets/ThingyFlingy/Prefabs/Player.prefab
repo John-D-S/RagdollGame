@@ -238,9 +238,10 @@ MonoBehaviour:
   innerFieldRepulsionStrength: 1
   noForceRadius: 0.45
   shootVelocity: 45
+  coolDownTime: 0.1
   maxThingies: 64
   antiEscapeForceMultiplier: 2
-  camera: {fileID: 7723813665280788081}
+  usedCamera: {fileID: 7723813665280788081}
 --- !u!135 &4126098029853088035
 SphereCollider:
   m_ObjectHideFlags: 0
