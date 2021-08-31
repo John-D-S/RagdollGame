@@ -1,45 +1,62 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenuHandler : MonoBehaviour
 {
-	[SerializeField] private GameObject pauseMenu;
+	[SerializeField, Tooltip("The UI pause menu.")] private GameObject pauseMenu;
 	private bool isPaused = false;
 	public static bool IsPaused => thePauseMenuHandler.isPaused;
+	//the pause menu handler singleton.
 	private static PauseMenuHandler thePauseMenuHandler;
 	
 	private void Start()
 	{
+		//set the pauseMenuHandler singleton.
 		thePauseMenuHandler = this;
-		pauseMenu.SetActive(isPaused);
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+		UnPause();
 	}
 
+	/// <summary>
+	/// UnPauses the game
+	/// </summary>
+	private void UnPause()
+	{
+		Time.timeScale = 1;
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+		pauseMenu.SetActive(false);
+		isPaused = false;
+	}
+
+	/// <summary>
+	/// Pauses the game
+	/// </summary>
+	private void Pause()
+	{
+		Time.timeScale = 0;
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+		pauseMenu.SetActive(true);
+		isPaused = true;
+	}
+	
+	/// <summary>
+	/// Toggle the game being paused
+	/// </summary>
 	public void TogglePause()
 	{
 		if(isPaused)
 		{
-			Time.timeScale = 1;
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-			pauseMenu.SetActive(false);
-			isPaused = false;
+			UnPause();
 		}
 		else
 		{
-			Time.timeScale = 0;
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
-			pauseMenu.SetActive(true);
-			isPaused = true;
+			Pause();
 		}
 	}
 	
 	private void Update()
 	{
+		//Toggle pause when the escape key is pressed.
 		if(Input.GetButtonDown("Cancel") && pauseMenu)
 		{
 			TogglePause();

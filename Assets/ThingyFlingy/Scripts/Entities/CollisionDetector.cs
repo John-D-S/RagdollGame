@@ -8,15 +8,8 @@ public class CollisionDetector : MonoBehaviour
 {
 	private bool isColliding = false;
 	public bool IsColliding => isColliding;
+	// The thingyPhysics this collisionDetector Is connected to.
 	public ThingyPhysics connectedThingyPhysics;
-	
-	private void OnCollisionEnter(Collision other)
-	{
-		if(connectedThingyPhysics)
-		{
-			
-		}
-	}
 
 	private void OnCollisionStay(Collision other)
 	{
@@ -29,7 +22,7 @@ public class CollisionDetector : MonoBehaviour
 
 	private void OnCollisionExit(Collision other)
 	{
-		// if the tag of the other collider is not the same as the tag for this gameobject,set isColliding to false
+		// if the tag of the other collider is not the same as the tag for this gameobject, set isColliding to false
 		if(!other.collider.CompareTag(tag))
 		{
 			isColliding = false;

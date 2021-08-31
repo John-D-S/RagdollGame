@@ -1,18 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Hover : MonoBehaviour
 {
-    [SerializeField] private float targetHeight = 3;
+    [SerializeField, Tooltip("The height above the object below it that this object will try to hover.")] private float targetHeight = 3;
     public float TargetHeight => targetHeight;
-    [SerializeField] private float verticalDragModifier = 1;
+    [SerializeField, Tooltip("How much vertical drag will this gameObject have. This helps to prevent excessive bouncy oscillation.")] private float verticalDragModifier = 1;
     private Rigidbody rb;
     
+    /// <summary>
+    /// The amount of upward force to apply to this gameobject
+    /// </summary>
     private float UpwardThrust
     {
         get
@@ -20,6 +18,7 @@ public class Hover : MonoBehaviour
             if(rb)
             {
                 RaycastHit hit = new RaycastHit();
+                // if the gameobject is above a collider, apply a force to hover.
                 if(Physics.Raycast(transform.position, Vector3.down, out hit,targetHeight * 2f, ~LayerMask.GetMask("IgnoredByHover", "Hover")))
                 {
                     float height = hit.distance;
@@ -32,7 +31,6 @@ public class Hover : MonoBehaviour
 
     private void Start()
     {
-        //gameObject.layer = LayerMask.GetMask("Hover");
         rb = GetComponent<Rigidbody>();
     }
 

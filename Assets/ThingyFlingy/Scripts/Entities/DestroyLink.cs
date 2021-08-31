@@ -6,10 +6,11 @@ using UnityEngine.Events;
 
 public class DestroyLink : MonoBehaviour
 {
-    [SerializeField] private GameObject linkedGameObject;
+    [SerializeField, Tooltip("This gameobject will be destroyed when the LinkedGameObject is destroyed.")] private GameObject linkedGameObject;
 
     private void FixedUpdate()
     {
+        //if the linked gameobject is destroyed, destroy this one.
         if(!linkedGameObject)
         {
             Destroy(gameObject);

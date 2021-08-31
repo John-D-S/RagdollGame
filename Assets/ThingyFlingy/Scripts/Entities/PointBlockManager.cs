@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using TMPro;
-
 using UnityEngine;
 
 public class PointBlockManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI blocksRemaningDisplay;
+    [SerializeField, Tooltip("The text that displays the number of blocks remaining.")] private TextMeshProUGUI blocksRemaningDisplay;
+    // the number of blocks remaining.
     private int blocksRemaining = 0;
+    // gets and sets blocksRemaining and changes the blocksRemainingDisplayText to display the number of blocks remaining,
+    // or a message when the number of blocks remaining is 0.
     public int BlocksRemaining
     {
         get => blocksRemaining;
@@ -26,10 +24,12 @@ public class PointBlockManager : MonoBehaviour
             }
         }
     }
+    // the pointblockManager singleton.
     public static PointBlockManager thePointBlockManager;
     
     private void Start()
     {
+        // set the pointblock manager 
         thePointBlockManager = this;
     }
 }
