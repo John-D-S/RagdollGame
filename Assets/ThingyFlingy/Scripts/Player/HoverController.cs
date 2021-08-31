@@ -21,8 +21,6 @@ public class HoverController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private Vector3 StabilizingTorque
@@ -47,21 +45,24 @@ public class HoverController : MonoBehaviour
     
     private void Update()
     {
-        UpdateForceDirection();
-        if(cameraGameObject)
+        if(!PauseMenuHandler.IsPaused)
         {
-            currentCameraXRotation += Input.GetAxisRaw("Mouse Y");
-            currentCameraYRotation += Input.GetAxisRaw("Mouse X");
-            if(currentCameraXRotation > maxVerticalCameraAngle)
+            UpdateForceDirection();
+            if(cameraGameObject)
             {
-                currentCameraXRotation = maxVerticalCameraAngle;
+                currentCameraXRotation += Input.GetAxisRaw("Mouse Y");
+                currentCameraYRotation += Input.GetAxisRaw("Mouse X");
+                if(currentCameraXRotation > maxVerticalCameraAngle)
+                {
+                    currentCameraXRotation = maxVerticalCameraAngle;
+                }
+                else if(currentCameraXRotation < -maxVerticalCameraAngle)
+                {
+                    currentCameraXRotation = -maxVerticalCameraAngle;
+                }
+                cameraGameObject.transform.position = gameObject.transform.position + gameObject.transform.rotation * Quaternion.Euler(-currentCameraXRotation, currentCameraYRotation, 0) * cameraOffset;
+                cameraGameObject.transform.LookAt(transform.position + cameraLookPosition);
             }
-            else if(currentCameraXRotation < -maxVerticalCameraAngle)
-            {
-                currentCameraXRotation = -maxVerticalCameraAngle;
-            }
-            cameraGameObject.transform.position = gameObject.transform.position + gameObject.transform.rotation * Quaternion.Euler(-currentCameraXRotation, currentCameraYRotation, 0) * cameraOffset;
-            cameraGameObject.transform.LookAt(transform.position + cameraLookPosition);
         }
     }
 

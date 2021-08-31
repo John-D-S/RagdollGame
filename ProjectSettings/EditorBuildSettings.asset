@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/ThingyFlingy/Scenes/Menu.unity
+    guid: 11d1fe9548c333940bd10d798e4c6128
+  - enabled: 1
     path: Assets/ThingyFlingy/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

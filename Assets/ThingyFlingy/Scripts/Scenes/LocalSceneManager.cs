@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class LocalSceneManager : MonoBehaviour
 {
     public delegate void DoThing();
     
@@ -31,6 +31,14 @@ public class SceneManager : MonoBehaviour
         if(!dothingAfterSecondsRunning)
         {
             StartCoroutine(DoThingAfterSeconds(_seconds, QuitGame));
+        }
+    }
+
+    public void LoadScene(int _sceneIndex)
+    {
+        if(_sceneIndex < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings && _sceneIndex > -1)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(_sceneIndex);
         }
     }
 
