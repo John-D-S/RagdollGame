@@ -214,7 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2c9d5dbf4721d4a8ad584107fee5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationTorque: 60
   movementForce: 40
   maxVerticalCameraAngle: 85
   cameraGameObject: {fileID: 7723813665280788081}
@@ -233,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outerFieldRadius: 5
-  outerFieldAttractionStrength: 20
+  outerFieldAttractionStrength: 35
   innerFieldRadius: 0.45
   innerFieldRepulsionStrength: 1
   noForceRadius: 0.45
