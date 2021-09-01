@@ -19,7 +19,7 @@ public class PointBlockManager : MonoBehaviour
                 blocksRemaningDisplay.text = blocksRemaining.ToString();
                 if(blocksRemaining <= 0)
                 {
-                    blocksRemaningDisplay.text = "You win. The mudmen are pleased. Turn the game off.";
+                    blocksRemaningDisplay.text = "You won the level. The mudmen are pleased.";
                 }   
             }
         }
